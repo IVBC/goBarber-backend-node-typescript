@@ -1,8 +1,10 @@
 import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
-
 import uploadConfig from '../config/upload';
+
+import AppError from '../errors/AppError';
+
 import User from '../models/User';
 
 interface RequestDTO {
@@ -17,7 +19,7 @@ class UpdateUserAvatarService {
     const user = await usersRepository.findOne(user_id);
 
     if (!user) {
-      throw new Error('Only authenticated users can change avatat.');
+      throw new AppError('Only authenticated users can change avatat.', 401);
     }
 
     if (user.avatar) {
