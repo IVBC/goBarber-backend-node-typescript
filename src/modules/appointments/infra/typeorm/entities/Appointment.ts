@@ -22,6 +22,13 @@ class Appointment {
   @JoinColumn({ name: 'provider_id' }) // indica qual coluna de appointment vai representar o usuario
   provider: User;
 
+  @Column()
+  user_id: string;
+
+  @ManyToOne(() => User) // Varios agendamentos pertence a um usuario
+  @JoinColumn({ name: 'user_id' }) // indica qual coluna de appointment vai representar o usuario
+  user: User;
+
   @Column('timestamp with time zone')
   date: Date;
 
