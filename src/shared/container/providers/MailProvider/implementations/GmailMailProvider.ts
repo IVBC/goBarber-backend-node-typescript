@@ -32,6 +32,7 @@ export default class GmailMailProvider implements IMailProvider {
     });
 
     const accessToken = this.oauth2client.getAccessToken();
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
