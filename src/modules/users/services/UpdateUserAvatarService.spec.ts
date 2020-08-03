@@ -1,5 +1,6 @@
 import AppError from '@shared/errors/AppError';
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
@@ -7,6 +8,7 @@ import UpdateUserAvatarService from './UpdateUserAvatarService';
 
 let fakeUserRepository: FakeUsersRepository;
 let fakeStorageProvider: FakeStorageProvider;
+let fakeCacheProvider: FakeCacheProvider;
 let fakeHashProvider: FakeHashProvider;
 let updateUserAvatar: UpdateUserAvatarService;
 let createUser: CreateUserService;
@@ -16,8 +18,13 @@ describe('UpdateUserAvatar', () => {
     fakeUserRepository = new FakeUsersRepository();
     fakeStorageProvider = new FakeStorageProvider();
     fakeHashProvider = new FakeHashProvider();
+    fakeCacheProvider = new FakeCacheProvider();
 
-    createUser = new CreateUserService(fakeUserRepository, fakeHashProvider);
+    createUser = new CreateUserService(
+      fakeUserRepository,
+      fakeHashProvider,
+      fakeCacheProvider,
+    );
 
     updateUserAvatar = new UpdateUserAvatarService(
       fakeUserRepository,
